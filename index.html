@@ -75,11 +75,6 @@ animation:fall linear infinite
 @keyframes fall{
 to{transform:translateY(110vh);opacity:0}
 }
-
-.scratch{
-background:#999;color:#999;padding:20px;border-radius:16px;cursor:pointer
-}
-.reveal{background:rgba(255,255,255,.2);color:#fff}
 </style>
 </head>
 
@@ -110,6 +105,7 @@ body.className=bgs[step%bgs.length];
 
 if(step===1){
 box.innerHTML=`<h1>Love Meter 💗</h1>
+<p>Tap till it becomes infinite ♾️</p>
 <div class="meter"><div class="fill" id="fill"></div></div>
 <button onclick="tap()">Tap 💖</button>
 <p id="m"></p>
@@ -117,53 +113,50 @@ box.innerHTML=`<h1>Love Meter 💗</h1>
 }
 
 else if(step===2){
-box.innerHTML=`<h1>Scratch to Reveal ✨</h1>
-<div class="scratch" id="s" onclick="rev()">Tap here 💌</div>
+box.innerHTML=`<h1>MCQ 1 💕</h1>
+<p>How much do I love you?</p>
+<div class="opt" onclick="r('Nope 😜')">A little 🤏</div>
+<div class="opt" onclick="r('Moreeee 😍')">A lot ❤️</div>
+<div class="opt" onclick="r('Correct ♾️❤️')">Infinite ♾️</div>
+<p id="rx"></p>
 <button onclick="next()">Next ➡️</button>`;
 }
 
 else if(step===3){
-box.innerHTML=`<h1>MCQ 1 💕</h1>
-<div class="opt" onclick="r('Wrong 😜')">A little</div>
-<div class="opt" onclick="r('Still less 😘')">A lot</div>
-<div class="opt" onclick="r('Correct ♾️❤️')">Infinite</div>
+box.innerHTML=`<h1>MCQ 2 💍👶</h1>
+<p>What are my plans with you?</p>
+<div class="opt" onclick="r('Never 😤')">Just time pass 😅</div>
+<div class="opt" onclick="r('You + Me + Forever 💍👶❤️')">Marriage + Baby + Forever</div>
 <p id="rx"></p>
 <button onclick="next()">Next ➡️</button>`;
 }
 
 else if(step===4){
-box.innerHTML=`<h1>MCQ 2 💍👶</h1>
-<div class="opt" onclick="r('Never 😤')">Time pass</div>
-<div class="opt" onclick="r('Forever 💍👶❤️')">Marriage + Baby</div>
+box.innerHTML=`<h1>MCQ 3 🌍</h1>
+<p>What are you to me?</p>
+<div class="opt" onclick="r('More than that 😘')">My girlfriend 😌</div>
+<div class="opt" onclick="r('YES 🥹❤️ My everything')">My everything 💫</div>
 <p id="rx"></p>
 <button onclick="next()">Next ➡️</button>`;
 }
 
 else if(step===5){
-box.innerHTML=`<h1>MCQ 3 🌍</h1>
-<div class="opt" onclick="r('More than that 😘')">Girlfriend</div>
-<div class="opt" onclick="r('My everything 🥹❤️')">Everything</div>
-<p id="rx"></p>
-<button onclick="next()">Next ➡️</button>`;
-}
-
-else if(step===6){
 box.innerHTML=`<h1>Will you be my Valentine? 💘</h1>
 <button onclick="no()">NO 😏</button>
 <button onclick="yes()">YES 😍</button>`;
 }
 
-else if(step===7){
+else if(step===6){
 box.innerHTML=`<h1>My Promises 🤍</h1>
 <p class="line" style="animation-delay:.2s">I promise to stand by you.</p>
 <p class="line" style="animation-delay:1s">I promise to grow old with you.</p>
 <p class="line" style="animation-delay:2s">I promise to love you endlessly.</p>
-<button onclick="count()">Next ➡️</button>`;
+<button onclick="next()">Next ➡️</button>`;
 }
 
-else if(step===8){
-box.innerHTML=`<h1>5</h1><p>Something special is coming…</p>`;
+else if(step===7){
 let c=5;
+box.innerHTML=`<h1>${c}</h1><p>Something special is coming…</p>`;
 let i=setInterval(()=>{
 c--;
 box.innerHTML=`<h1>${c}</h1><p>Something special is coming…</p>`;
@@ -175,24 +168,19 @@ if(c===0){clearInterval(i);final()}
 function tap(){
 taps++;
 document.getElementById("fill").style.width=Math.min(taps*20,100)+"%";
-document.getElementById("m").innerHTML=taps>=5?"♾️ Our love is infinite ♾️":"Keep tapping 😘";
-}
-
-function rev(){
-let s=document.getElementById("s");
-s.classList.add("reveal");
-s.innerHTML="No matter what happens, how much we age, my love will always be infinite for you ♾️❤️";
+document.getElementById("m").innerHTML=
+taps>=5?"♾️ Our love is infinite ♾️":"Keep tapping 😘";
 }
 
 function r(t){document.getElementById("rx").innerHTML=t}
 
 function no(){
-box.innerHTML=`<h1>Error ❌😂</h1><p>You are already my Valentine 😌❤️</p><button onclick="yes()">YES 😍</button>`;
+box.innerHTML=`<h1>Error ❌😂</h1>
+<p>You are already my Valentine 😌❤️</p>
+<button onclick="yes()">YES 😍</button>`;
 }
 
 function yes(){next()}
-
-function count(){next()}
 
 function final(){
 box.innerHTML=`<h1>My Love ❤️</h1>
