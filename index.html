@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You My Love 💖</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', Arial, sans-serif;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+  overflow: hidden;
+}
+
+.container {
+  background: rgba(255,255,255,0.15);
+  padding: 25px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 420px;
+  animation: fade 0.8s ease;
+}
+
+h1 { font-size: 26px; }
+p { font-size: 18px; }
+
+button, .option {
+  background: rgba(255,255,255,0.25);
+  border: none;
+  padding: 12px;
+  border-radius: 20px;
+  margin: 10px 0;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button {
+  background: #ff3f6c;
+  color: #fff;
+}
+
+.option:hover, button:hover {
+  background: rgba(255,255,255,0.4);
+}
+
+.reaction {
+  margin-top: 10px;
+  font-size: 18px;
+  animation: fade 0.5s ease;
+}
+
+@keyframes fade {
+  from {opacity:0; transform:scale(0.9);}
+  to {opacity:1; transform:scale(1);}
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  bottom: -10px;
+  font-size: 20px;
+  animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+  0% {transform: translateY(0); opacity: 1;}
+  100% {transform: translateY(-100vh); opacity: 0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="box">
+  <h1>Hi Beautiful 💖</h1>
+  <p>This is for you my love 😘</p>
+  <button onclick="next()">Next ➡️</button>
+</div>
+
+<script>
+let step = 0;
+
+function next() {
+  step++;
+  const box = document.getElementById("box");
+
+  if (step === 1) {
+    box.innerHTML = `
+      <h1>Let’s Play a Game 🎮💞</h1>
+      <p>Ready, my love? 😌</p>
+      <button onclick="next()">Start ➡️</button>`;
+  }
+
+  else if (step === 2) {
+    box.innerHTML = `
+      <h1>Question 1 💌</h1>
+      <p>How much do I love you? 🥰</p>
+      <div class="option" onclick="react('A little? 😳 Nope 😅')">A little 🤏</div>
+      <div class="option" onclick="react('Moreeee 😍 but not enough 😜')">A lot ❤️</div>
+      <div class="option" onclick="react('Correct 😌♾️ Infinite love for you 💕')">Infinite ♾️💖</div>
+      <div class="reaction" id="reaction"></div>
+      <button onclick="next()">Next ➡️</button>`;
+  }
+
+  else if (step === 3) {
+    box.innerHTML = `
+      <h1>Question 2 💍</h1>
+      <p>What are my plans with you? 😘</p>
+      <div class="option" onclick="react('Haha no way 😜')">Just time pass 😅</div>
+      <div class="option" onclick="react('You + Me + Forever 💍👶❤️')">
+        Marriage 💍 + Baby 👶 + Forever 💕
+      </div>
+      <div class="reaction" id="reaction"></div>
+      <button onclick="next()">Next ➡️</button>`;
+  }
+
+  else if (step === 4) {
+    box.innerHTML = `
+      <h1>Question 3 🥹</h1>
+      <p>What are you to me? 💗</p>
+      <div class="option" onclick="react('Nope 😤 try again 😜')">Just my girlfriend 😌</div>
+      <div class="option" onclick="react('YES 🥹❤️ My everything 💫')">My everything 🌍💖</div>
+      <div class="reaction" id="reaction"></div>
+      <button onclick="next()">Next ➡️</button>`;
+  }
+
+  else if (step === 5) {
+    box.innerHTML = `
+      <h1>Important Question 😳💘</h1>
+      <p>Will you be my Valentine? 💝</p>
+      <button onclick="nope()">NO 😏</button>
+      <button onclick="yes()">YES 😍</button>`;
+  }
+}
+
+function react(text) {
+  document.getElementById("reaction").innerHTML = text;
+}
+
+function nope() {
+  document.getElementById("box").innerHTML = `
+    <h1>Error ❌😂</h1>
+    <p>You are already my Valentine 😌❤️</p>
+    <p>Please click YES 💖</p>
+    <button onclick="yes()">YES 😍</button>`;
+}
+
+function yes() {
+  startHearts();
+  document.getElementById("box").innerHTML = `
+    <h1>YAYYY 😍💖</h1>
+    <p>Sending you unlimited love 💕✨</p>
+    <button onclick="final()">Next ➡️</button>`;
+}
+
+function final() {
+  document.getElementById("box").innerHTML = `
+    <h1>Finally… 💘</h1>
+    <p>You are my Valentine ❤️</p>
+    <p>I loveee you sooo much babyyy 😘💖</p>`;
+}
+
+function startHearts() {
+  for (let i = 0; i < 25; i++) {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+  }
+}
+</script>
+
+</body>
+</html>
