@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -6,32 +6,42 @@
 <title>For My Forever ❤️</title>
 
 <style>
+* { box-sizing: border-box; }
+
 body {
   margin: 0;
   font-family: 'Poppins', Arial, sans-serif;
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   color: #fff;
   overflow: hidden;
-  transition: background 1.2s ease;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 1.2s ease;
 }
 
-/* Dynamic backgrounds */
-.bg1 { background: linear-gradient(135deg, #667eea, #764ba2); }
-.bg2 { background: linear-gradient(135deg, #ffecd2, #fcb69f); }
-.bg3 { background: linear-gradient(135deg, #141e30, #243b55); }
-.bg4 { background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); }
-.bg5 { background: linear-gradient(135deg, #1f4037, #99f2c8); }
+/* Mountain backgrounds */
+.bg1 { background-image: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470"); }
+.bg2 { background-image: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"); }
+.bg3 { background-image: url("https://images.unsplash.com/photo-1519681393784-d120267933ba"); }
+.bg4 { background-image: url("https://images.unsplash.com/photo-1500534314209-a25ddb2bd429"); }
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+}
 
 .container {
+  position: relative;
+  z-index: 2;
+  max-width: 420px;
+  margin: auto;
+  top: 50%;
+  transform: translateY(-50%);
   background: rgba(255,255,255,0.15);
   backdrop-filter: blur(10px);
   padding: 25px;
   border-radius: 22px;
-  width: 90%;
-  max-width: 430px;
   text-align: center;
   animation: slideIn 0.8s ease;
 }
@@ -46,190 +56,190 @@ button, .option {
   border-radius: 22px;
   margin: 10px 0;
   font-size: 16px;
-  cursor: pointer;
   color: #fff;
+  cursor: pointer;
 }
 
 button:hover, .option:hover {
   background: rgba(255,255,255,0.45);
 }
 
-.reaction {
-  margin-top: 10px;
-  font-size: 18px;
-  animation: fade 0.5s ease;
-}
-
 /* Animations */
 @keyframes slideIn {
-  from { opacity: 0; transform: translateY(30px) scale(0.95); }
+  from { opacity: 0; transform: translateY(40px) scale(0.95); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
-@keyframes fade {
-  from { opacity:0; }
-  to { opacity:1; }
+.fade-line {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: lineIn 0.8s forwards;
+}
+@keyframes lineIn {
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Floating hearts & sparkles */
-.heart, .sparkle {
-  position: absolute;
-  bottom: -10px;
-  animation: floatUp linear infinite;
+/* Love meter */
+.meter {
+  width: 100%;
+  height: 22px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 20px;
+  overflow: hidden;
 }
-@keyframes floatUp {
-  0% { transform: translateY(0); opacity:1; }
-  100% { transform: translateY(-110vh); opacity:0; }
+.fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #ff6a88, #ff99ac);
+  transition: width 0.4s ease;
+}
+
+/* Falling petals & stars */
+.petal, .star {
+  position: fixed;
+  top: -10px;
+  z-index: 1;
+  animation: fall linear infinite;
+}
+@keyframes fall {
+  to { transform: translateY(110vh); opacity: 0; }
+}
+
+/* Scratch card */
+.scratch {
+  background: #999;
+  color: #999;
+  padding: 20px;
+  border-radius: 16px;
+  cursor: pointer;
+}
+.revealed {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
 }
 </style>
 </head>
 
 <body class="bg1">
-
-<audio id="music" loop>
-  <source src="https://cdn.pixabay.com/audio/2023/03/27/audio_8b7e3e9b1f.mp3" type="audio/mpeg">
-</audio>
+<div class="overlay"></div>
 
 <div class="container" id="box">
-  <h1>Hi Beautiful ✨</h1>
-  <p>This is for you my love 💖</p>
+  <h1>Hi Beautiful 🏔️✨</h1>
+  <p>This is for you, my love ❤️</p>
   <button onclick="next()">Next ➡️</button>
 </div>
 
 <script>
 let step = 0;
-const body = document.body;
+let taps = 0;
 const box = document.getElementById("box");
-const music = document.getElementById("music");
+const body = document.body;
 
 function next() {
   step++;
-  if (step === 1) music.play();
-  updateBg();
+  changeBg();
 
   if (step === 1) {
     box.innerHTML = `
-      <h1>Let’s Play a Game 🎮💞</h1>
-      <p>Tap the heart to collect my love 💗</p>
-      <button onclick="spawnHearts()">Tap 💖</button>
+      <h1>Love Meter 💗</h1>
+      <p>Tap to fill our love 💞</p>
+      <div class="meter"><div class="fill" id="fill"></div></div>
+      <button onclick="tapLove()">Tap 💖</button>
+      <p id="meterMsg"></p>
       <button onclick="next()">Next ➡️</button>`;
   }
 
   else if (step === 2) {
     box.innerHTML = `
-      <h1>Choose Our Moment 🫂</h1>
-      <div class="option" onclick="react('That moment still lives in my heart 🥹')">First Meet 😌</div>
-      <div class="option" onclick="react('My favorite safe place 🫂❤️')">First Hug 🫂</div>
-      <div class="option" onclick="react('Endless nights, endless love 🌙')">Late Night Talks 🌙</div>
-      <div class="reaction" id="reaction"></div>
+      <h1>Scratch to Reveal ✨</h1>
+      <p>Tap the card 💌</p>
+      <div class="scratch" id="scratch" onclick="reveal()">
+        Scratch Me 💭
+      </div>
       <button onclick="next()">Next ➡️</button>`;
   }
 
   else if (step === 3) {
     box.innerHTML = `
-      <h1>True or True 😏</h1>
-      <div class="option" onclick="react('100% TRUE 😌💗')">You are my safe place 🫶</div>
-      <div class="option" onclick="react('Obviously 😤❤️')">I get jealous for you 👀</div>
-      <div class="reaction" id="reaction"></div>
+      <h1>My Promises 🤍</h1>
+      <p class="fade-line" style="animation-delay:0s">I promise to stand by you.</p>
+      <p class="fade-line" style="animation-delay:0.6s">I promise to grow old with you.</p>
+      <p class="fade-line" style="animation-delay:1.2s">I promise to love you endlessly.</p>
       <button onclick="next()">Next ➡️</button>`;
   }
 
-  /* MCQs */
   else if (step === 4) {
-    box.innerHTML = `
-      <h1>How much do I love you? ♾️</h1>
-      <div class="option" onclick="react('Haha nope 😜')">A little 🤏</div>
-      <div class="option" onclick="react('Moreeee 😍')">A lot ❤️</div>
-      <div class="option" onclick="react('Correct ♾️💖')">Infinite ♾️</div>
-      <div class="reaction" id="reaction"></div>
-      <button onclick="next()">Next ➡️</button>`;
+    startCountdown(5);
   }
 
   else if (step === 5) {
     box.innerHTML = `
-      <h1>My Plans With You 💍👶</h1>
-      <div class="option" onclick="react('Never 😤')">Just time pass 😅</div>
-      <div class="option" onclick="react('You + Me + Forever 💍👶❤️')">Marriage + Baby + Forever</div>
-      <div class="reaction" id="reaction"></div>
-      <button onclick="next()">Next ➡️</button>`;
-  }
-
-  else if (step === 6) {
-    box.innerHTML = `
-      <h1>What are you to me? 🌍</h1>
-      <div class="option" onclick="react('More than that 😘')">My girlfriend 😌</div>
-      <div class="option" onclick="react('YES 🥹❤️ My everything')">My everything 💫</div>
-      <div class="reaction" id="reaction"></div>
-      <button onclick="next()">Next ➡️</button>`;
-  }
-
-  else if (step === 7) {
-    box.innerHTML = `
-      <h1>Will you be my Valentine? 💘</h1>
-      <button onclick="nope()">NO 😏</button>
-      <button onclick="yes()">YES 😍</button>`;
+      <h1>My Love ❤️</h1>
+      <p>
+      It’s been 3 yrs and I always loved you and will always love you.<br><br>
+      This Valentine’s Day I want to give you something special that I’ll give you when I meet you.<br><br>
+      Tell me how much you liked it and always remember one thing my love…<br><br>
+      <b>I Loveeeeeeeeeeeeeeeeee youuuuuuuuuuuuuuuuu infiniteeeeeeeeeeeeeeeee myyyyyyyyyyyy wifeyyyyyyyyyyyy</b><br>
+      😘😘😘😘😘😘❤️❤️❤️✨️✨️✨️🫂🫂🫂🫂🫂💗💗💗💗💗
+      </p>`;
   }
 }
 
-function react(text) {
-  document.getElementById("reaction").innerHTML = text;
+function tapLove() {
+  taps++;
+  let fill = document.getElementById("fill");
+  let msg = document.getElementById("meterMsg");
+
+  if (taps < 5) {
+    fill.style.width = (taps * 20) + "%";
+    msg.innerHTML = "Keep tapping 😘";
+  } else {
+    fill.style.width = "100%";
+    msg.innerHTML = "♾️ Our love is INFINITE ♾️";
+  }
 }
 
-function nope() {
-  box.innerHTML = `
-    <h1>Error ❌😤</h1>
-    <p>You are already my Valentine 😌❤️</p>
-    <button onclick="yes()">YES 😍</button>`;
+function reveal() {
+  const s = document.getElementById("scratch");
+  s.classList.add("revealed");
+  s.innerHTML = "No matter what happens, how much we age, my love will always be infinite for you ♾️❤️";
 }
 
-function yes() {
-  spawnSparkles();
-  box.innerHTML = `
-    <h1>You said YES 🥹💖</h1>
-    <p>Now read this carefully…</p>
-    <button onclick="final()">Next ➡️</button>`;
+function startCountdown(n) {
+  let count = n;
+  box.innerHTML = `<h1>${count}</h1><p>Something special is coming…</p>`;
+  let interval = setInterval(() => {
+    count--;
+    if (count > 0) {
+      box.innerHTML = `<h1>${count}</h1><p>Something special is coming…</p>`;
+    } else {
+      clearInterval(interval);
+      next();
+    }
+  }, 1000);
 }
 
-function final() {
-  body.className = "bg4";
-  box.innerHTML = `
-    <h1>My Love ❤️</h1>
-    <p>
-    It’s been 3 yrs and I always loved you and will always love you.<br><br>
-    This Valentine’s Day I want to give you something special that I’ll give you when I meet you.<br><br>
-    Tell me how much you liked it and always remember one thing My Love…<br><br>
-    <b>I Loveeeeeeeeeeeeeeeeee youuuuuuuuuuuuuuuuu infiniteeeeeeeeeeeeeeeee myyyyyyyyyyyy wifeyyyyyyyyyyyy</b><br>
-    😘😘😘😘😘😘❤️❤️❤️✨️✨️✨️🫂🫂🫂🫂🫂💗💗💗💗💗
-    </p>`;
-}
-
-function updateBg() {
-  const bgs = ["bg1","bg2","bg3","bg4","bg5"];
+function changeBg() {
+  const bgs = ["bg1","bg2","bg3","bg4"];
   body.className = bgs[step % bgs.length];
 }
 
-function spawnHearts() {
-  for (let i=0;i<15;i++) {
-    let h=document.createElement("div");
-    h.className="heart";
-    h.innerHTML="💖";
-    h.style.left=Math.random()*100+"vw";
-    h.style.animationDuration=(3+Math.random()*3)+"s";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),6000);
-  }
-}
+setInterval(() => {
+  let p = document.createElement("div");
+  p.className = "petal";
+  p.innerHTML = "🌹";
+  p.style.left = Math.random()*100 + "vw";
+  p.style.animationDuration = (5+Math.random()*5)+"s";
+  document.body.appendChild(p);
+  setTimeout(()=>p.remove(),10000);
 
-function spawnSparkles() {
-  for (let i=0;i<20;i++) {
-    let s=document.createElement("div");
-    s.className="sparkle";
-    s.innerHTML="✨";
-    s.style.left=Math.random()*100+"vw";
-    s.style.animationDuration=(3+Math.random()*2)+"s";
-    document.body.appendChild(s);
-    setTimeout(()=>s.remove(),5000);
-  }
-}
+  let s = document.createElement("div");
+  s.className = "star";
+  s.innerHTML = "✨";
+  s.style.left = Math.random()*100 + "vw";
+  s.style.animationDuration = (4+Math.random()*4)+"s";
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(),9000);
+}, 800);
 </script>
 
 </body>
