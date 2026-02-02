@@ -6,240 +6,220 @@
 <title>For My Forever ❤️</title>
 
 <style>
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  font-family: 'Poppins', Arial, sans-serif;
-  height: 100vh;
-  color: #fff;
-  overflow: hidden;
-  background-size: cover;
-  background-position: center;
-  transition: background-image 1.2s ease;
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:Poppins,Arial;
+height:100vh;
+color:#fff;
+overflow:hidden;
+background-size:cover;
+background-position:center;
+transition:background-image 1s ease;
 }
+.bg1{background-image:url("https://images.unsplash.com/photo-1501785888041-af3ef285b470")}
+.bg2{background-image:url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee")}
+.bg3{background-image:url("https://images.unsplash.com/photo-1519681393784-d120267933ba")}
+.bg4{background-image:url("https://images.unsplash.com/photo-1500534314209-a25ddb2bd429")}
 
-/* Mountain backgrounds */
-.bg1 { background-image: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470"); }
-.bg2 { background-image: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"); }
-.bg3 { background-image: url("https://images.unsplash.com/photo-1519681393784-d120267933ba"); }
-.bg4 { background-image: url("https://images.unsplash.com/photo-1500534314209-a25ddb2bd429"); }
-
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
+.overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.45)
 }
-
-.container {
-  position: relative;
-  z-index: 2;
-  max-width: 420px;
-  margin: auto;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(10px);
-  padding: 25px;
-  border-radius: 22px;
-  text-align: center;
-  animation: slideIn 0.8s ease;
+.container{
+position:relative;
+z-index:2;
+max-width:430px;
+margin:auto;
+top:50%;
+transform:translateY(-50%);
+background:rgba(255,255,255,.15);
+backdrop-filter:blur(10px);
+padding:25px;
+border-radius:22px;
+text-align:center;
+animation:slide .8s ease
 }
-
-h1 { font-size: 26px; }
-p { font-size: 18px; }
-
-button, .option {
-  background: rgba(255,255,255,0.25);
-  border: none;
-  padding: 12px;
-  border-radius: 22px;
-  margin: 10px 0;
-  font-size: 16px;
-  color: #fff;
-  cursor: pointer;
+h1{font-size:26px}
+p{font-size:18px}
+button,.opt{
+background:rgba(255,255,255,.25);
+border:none;
+padding:12px;
+border-radius:22px;
+margin:10px 0;
+font-size:16px;
+color:#fff;
+cursor:pointer
 }
+button:hover,.opt:hover{background:rgba(255,255,255,.45)}
 
-button:hover, .option:hover {
-  background: rgba(255,255,255,0.45);
+@keyframes slide{
+from{opacity:0;transform:translateY(40px) scale(.95)}
+to{opacity:1;transform:translateY(0) scale(1)}
 }
 
-/* Animations */
-@keyframes slideIn {
-  from { opacity: 0; transform: translateY(40px) scale(0.95); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+.line{opacity:0;animation:line 1s forwards}
+@keyframes line{to{opacity:1}}
+
+.meter{width:100%;height:22px;background:rgba(255,255,255,.3);border-radius:20px;overflow:hidden}
+.fill{height:100%;width:0;background:linear-gradient(90deg,#ff6a88,#ff99ac);transition:.4s}
+
+.petal,.star{
+position:fixed;
+top:-10px;
+z-index:1;
+animation:fall linear infinite
 }
-.fade-line {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: lineIn 0.8s forwards;
-}
-@keyframes lineIn {
-  to { opacity: 1; transform: translateY(0); }
+@keyframes fall{
+to{transform:translateY(110vh);opacity:0}
 }
 
-/* Love meter */
-.meter {
-  width: 100%;
-  height: 22px;
-  background: rgba(255,255,255,0.3);
-  border-radius: 20px;
-  overflow: hidden;
+.scratch{
+background:#999;color:#999;padding:20px;border-radius:16px;cursor:pointer
 }
-.fill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #ff6a88, #ff99ac);
-  transition: width 0.4s ease;
-}
-
-/* Falling petals & stars */
-.petal, .star {
-  position: fixed;
-  top: -10px;
-  z-index: 1;
-  animation: fall linear infinite;
-}
-@keyframes fall {
-  to { transform: translateY(110vh); opacity: 0; }
-}
-
-/* Scratch card */
-.scratch {
-  background: #999;
-  color: #999;
-  padding: 20px;
-  border-radius: 16px;
-  cursor: pointer;
-}
-.revealed {
-  background: rgba(255,255,255,0.2);
-  color: #fff;
-}
+.reveal{background:rgba(255,255,255,.2);color:#fff}
 </style>
 </head>
 
 <body class="bg1">
 <div class="overlay"></div>
 
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/audio/2023/03/27/audio_8b7e3e9b1f.mp3">
+</audio>
+
 <div class="container" id="box">
-  <h1>Hi Beautiful 🏔️✨</h1>
-  <p>This is for you, my love ❤️</p>
-  <button onclick="next()">Next ➡️</button>
+<h1>Hi Beautiful 🏔️✨</h1>
+<p>This is for you my love ❤️</p>
+<button onclick="next()">Next ➡️</button>
 </div>
 
 <script>
-let step = 0;
-let taps = 0;
-const box = document.getElementById("box");
-const body = document.body;
+let step=0,taps=0;
+const box=document.getElementById("box");
+const body=document.body;
+const music=document.getElementById("music");
+const bgs=["bg1","bg2","bg3","bg4"];
 
-function next() {
-  step++;
-  changeBg();
+function next(){
+step++;
+if(step===1)music.play();
+body.className=bgs[step%bgs.length];
 
-  if (step === 1) {
-    box.innerHTML = `
-      <h1>Love Meter 💗</h1>
-      <p>Tap to fill our love 💞</p>
-      <div class="meter"><div class="fill" id="fill"></div></div>
-      <button onclick="tapLove()">Tap 💖</button>
-      <p id="meterMsg"></p>
-      <button onclick="next()">Next ➡️</button>`;
-  }
-
-  else if (step === 2) {
-    box.innerHTML = `
-      <h1>Scratch to Reveal ✨</h1>
-      <p>Tap the card 💌</p>
-      <div class="scratch" id="scratch" onclick="reveal()">
-        Scratch Me 💭
-      </div>
-      <button onclick="next()">Next ➡️</button>`;
-  }
-
-  else if (step === 3) {
-    box.innerHTML = `
-      <h1>My Promises 🤍</h1>
-      <p class="fade-line" style="animation-delay:0s">I promise to stand by you.</p>
-      <p class="fade-line" style="animation-delay:0.6s">I promise to grow old with you.</p>
-      <p class="fade-line" style="animation-delay:1.2s">I promise to love you endlessly.</p>
-      <button onclick="next()">Next ➡️</button>`;
-  }
-
-  else if (step === 4) {
-    startCountdown(5);
-  }
-
-  else if (step === 5) {
-    box.innerHTML = `
-      <h1>My Love ❤️</h1>
-      <p>
-      It’s been 3 yrs and I always loved you and will always love you.<br><br>
-      This Valentine’s Day I want to give you something special that I’ll give you when I meet you.<br><br>
-      Tell me how much you liked it and always remember one thing my love…<br><br>
-      <b>I Loveeeeeeeeeeeeeeeeee youuuuuuuuuuuuuuuuu infiniteeeeeeeeeeeeeeeee myyyyyyyyyyyy wifeyyyyyyyyyyyy</b><br>
-      😘😘😘😘😘😘❤️❤️❤️✨️✨️✨️🫂🫂🫂🫂🫂💗💗💗💗💗
-      </p>`;
-  }
+if(step===1){
+box.innerHTML=`<h1>Love Meter 💗</h1>
+<div class="meter"><div class="fill" id="fill"></div></div>
+<button onclick="tap()">Tap 💖</button>
+<p id="m"></p>
+<button onclick="next()">Next ➡️</button>`;
 }
 
-function tapLove() {
-  taps++;
-  let fill = document.getElementById("fill");
-  let msg = document.getElementById("meterMsg");
-
-  if (taps < 5) {
-    fill.style.width = (taps * 20) + "%";
-    msg.innerHTML = "Keep tapping 😘";
-  } else {
-    fill.style.width = "100%";
-    msg.innerHTML = "♾️ Our love is INFINITE ♾️";
-  }
+else if(step===2){
+box.innerHTML=`<h1>Scratch to Reveal ✨</h1>
+<div class="scratch" id="s" onclick="rev()">Tap here 💌</div>
+<button onclick="next()">Next ➡️</button>`;
 }
 
-function reveal() {
-  const s = document.getElementById("scratch");
-  s.classList.add("revealed");
-  s.innerHTML = "No matter what happens, how much we age, my love will always be infinite for you ♾️❤️";
+else if(step===3){
+box.innerHTML=`<h1>MCQ 1 💕</h1>
+<div class="opt" onclick="r('Wrong 😜')">A little</div>
+<div class="opt" onclick="r('Still less 😘')">A lot</div>
+<div class="opt" onclick="r('Correct ♾️❤️')">Infinite</div>
+<p id="rx"></p>
+<button onclick="next()">Next ➡️</button>`;
 }
 
-function startCountdown(n) {
-  let count = n;
-  box.innerHTML = `<h1>${count}</h1><p>Something special is coming…</p>`;
-  let interval = setInterval(() => {
-    count--;
-    if (count > 0) {
-      box.innerHTML = `<h1>${count}</h1><p>Something special is coming…</p>`;
-    } else {
-      clearInterval(interval);
-      next();
-    }
-  }, 1000);
+else if(step===4){
+box.innerHTML=`<h1>MCQ 2 💍👶</h1>
+<div class="opt" onclick="r('Never 😤')">Time pass</div>
+<div class="opt" onclick="r('Forever 💍👶❤️')">Marriage + Baby</div>
+<p id="rx"></p>
+<button onclick="next()">Next ➡️</button>`;
 }
 
-function changeBg() {
-  const bgs = ["bg1","bg2","bg3","bg4"];
-  body.className = bgs[step % bgs.length];
+else if(step===5){
+box.innerHTML=`<h1>MCQ 3 🌍</h1>
+<div class="opt" onclick="r('More than that 😘')">Girlfriend</div>
+<div class="opt" onclick="r('My everything 🥹❤️')">Everything</div>
+<p id="rx"></p>
+<button onclick="next()">Next ➡️</button>`;
 }
 
-setInterval(() => {
-  let p = document.createElement("div");
-  p.className = "petal";
-  p.innerHTML = "🌹";
-  p.style.left = Math.random()*100 + "vw";
-  p.style.animationDuration = (5+Math.random()*5)+"s";
-  document.body.appendChild(p);
-  setTimeout(()=>p.remove(),10000);
+else if(step===6){
+box.innerHTML=`<h1>Will you be my Valentine? 💘</h1>
+<button onclick="no()">NO 😏</button>
+<button onclick="yes()">YES 😍</button>`;
+}
 
-  let s = document.createElement("div");
-  s.className = "star";
-  s.innerHTML = "✨";
-  s.style.left = Math.random()*100 + "vw";
-  s.style.animationDuration = (4+Math.random()*4)+"s";
-  document.body.appendChild(s);
-  setTimeout(()=>s.remove(),9000);
-}, 800);
+else if(step===7){
+box.innerHTML=`<h1>My Promises 🤍</h1>
+<p class="line" style="animation-delay:.2s">I promise to stand by you.</p>
+<p class="line" style="animation-delay:1s">I promise to grow old with you.</p>
+<p class="line" style="animation-delay:2s">I promise to love you endlessly.</p>
+<button onclick="count()">Next ➡️</button>`;
+}
+
+else if(step===8){
+box.innerHTML=`<h1>5</h1><p>Something special is coming…</p>`;
+let c=5;
+let i=setInterval(()=>{
+c--;
+box.innerHTML=`<h1>${c}</h1><p>Something special is coming…</p>`;
+if(c===0){clearInterval(i);final()}
+},1000);
+}
+}
+
+function tap(){
+taps++;
+document.getElementById("fill").style.width=Math.min(taps*20,100)+"%";
+document.getElementById("m").innerHTML=taps>=5?"♾️ Our love is infinite ♾️":"Keep tapping 😘";
+}
+
+function rev(){
+let s=document.getElementById("s");
+s.classList.add("reveal");
+s.innerHTML="No matter what happens, how much we age, my love will always be infinite for you ♾️❤️";
+}
+
+function r(t){document.getElementById("rx").innerHTML=t}
+
+function no(){
+box.innerHTML=`<h1>Error ❌😂</h1><p>You are already my Valentine 😌❤️</p><button onclick="yes()">YES 😍</button>`;
+}
+
+function yes(){next()}
+
+function count(){next()}
+
+function final(){
+box.innerHTML=`<h1>My Love ❤️</h1>
+<p>
+It's been 3 yrs and I always loved you and will always love you.<br><br>
+This Valentine's Day I want to give you something special that I'll give you when I'll meet you.<br><br>
+Tell me how much you liked it and always remember one thing My Love<br><br>
+<b>I Loveeeeeeeeeeeeeeeeee youuuuuuuuuuuuuuuuu infiniteeeeeeeeeeeeeeeee myyyyyyyyyyyy wifeyyyyyyyyyyyy</b><br>
+😘😘😘😘😘😘❤️❤️❤️✨✨✨🫂🫂🫂🫂🫂💗💗💗💗💗
+</p>`;
+}
+
+setInterval(()=>{
+let p=document.createElement("div");
+p.className="petal";p.innerHTML="🌹";
+p.style.left=Math.random()*100+"vw";
+p.style.animationDuration=5+Math.random()*5+"s";
+document.body.appendChild(p);
+setTimeout(()=>p.remove(),9000);
+
+let s=document.createElement("div");
+s.className="star";s.innerHTML="✨";
+s.style.left=Math.random()*100+"vw";
+s.style.animationDuration=4+Math.random()*4+"s";
+document.body.appendChild(s);
+setTimeout(()=>s.remove(),8000);
+},800);
 </script>
 
 </body>
