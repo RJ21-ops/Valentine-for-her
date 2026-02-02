@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Forever ❤️</title>
+<title>For My Love ❤️</title>
 
 <style>
 *{box-sizing:border-box}
@@ -15,8 +15,10 @@ color:#fff;
 overflow:hidden;
 background-size:cover;
 background-position:center;
-transition:background-image 1s ease;
+transition:background-image 1.2s ease;
 }
+
+/* Nature backgrounds */
 .bg1{background-image:url("https://images.unsplash.com/photo-1501785888041-af3ef285b470")}
 .bg2{background-image:url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee")}
 .bg3{background-image:url("https://images.unsplash.com/photo-1519681393784-d120267933ba")}
@@ -25,8 +27,9 @@ transition:background-image 1s ease;
 .overlay{
 position:fixed;
 inset:0;
-background:rgba(0,0,0,.45)
+background:rgba(0,0,0,.5)
 }
+
 .container{
 position:relative;
 z-index:2;
@@ -36,13 +39,15 @@ top:50%;
 transform:translateY(-50%);
 background:rgba(255,255,255,.15);
 backdrop-filter:blur(10px);
-padding:25px;
-border-radius:22px;
+padding:26px;
+border-radius:24px;
 text-align:center;
-animation:slide .8s ease
+animation:cardIn .9s ease;
 }
+
 h1{font-size:26px}
 p{font-size:18px}
+
 button,.opt{
 background:rgba(255,255,255,.25);
 border:none;
@@ -51,26 +56,48 @@ border-radius:22px;
 margin:10px 0;
 font-size:16px;
 color:#fff;
-cursor:pointer
+cursor:pointer;
+transition:.3s
 }
 button:hover,.opt:hover{background:rgba(255,255,255,.45)}
 
-@keyframes slide{
+@keyframes cardIn{
 from{opacity:0;transform:translateY(40px) scale(.95)}
 to{opacity:1;transform:translateY(0) scale(1)}
 }
 
-.line{opacity:0;animation:line 1s forwards}
-@keyframes line{to{opacity:1}}
+/* Animated text lines */
+.line{
+opacity:0;
+transform:translateY(20px);
+animation:lineIn .9s forwards;
+}
+@keyframes lineIn{
+to{opacity:1;transform:translateY(0)}
+}
 
-.meter{width:100%;height:22px;background:rgba(255,255,255,.3);border-radius:20px;overflow:hidden}
-.fill{height:100%;width:0;background:linear-gradient(90deg,#ff6a88,#ff99ac);transition:.4s}
+/* Love meter */
+.meter{
+width:100%;
+height:22px;
+background:rgba(255,255,255,.3);
+border-radius:20px;
+overflow:hidden;
+margin:10px 0
+}
+.fill{
+height:100%;
+width:0;
+background:linear-gradient(90deg,#ff6a88,#ff99ac);
+transition:.4s
+}
 
+/* Falling petals & stars */
 .petal,.star{
 position:fixed;
 top:-10px;
 z-index:1;
-animation:fall linear infinite
+animation:fall linear infinite;
 }
 @keyframes fall{
 to{transform:translateY(110vh);opacity:0}
@@ -86,9 +113,9 @@ to{transform:translateY(110vh);opacity:0}
 </audio>
 
 <div class="container" id="box">
-<h1>Hi Beautiful 🏔️✨</h1>
-<p>This is for you my love ❤️</p>
-<button onclick="next()">Next ➡️</button>
+<h1>Are you ready, Khushu? ❤️</h1>
+<button onclick="readyNo()">NO 😏</button>
+<button onclick="next()">YES 🥹💖</button>
 </div>
 
 <script>
@@ -104,95 +131,148 @@ if(step===1)music.play();
 body.className=bgs[step%bgs.length];
 
 if(step===1){
-box.innerHTML=`<h1>Love Meter 💗</h1>
-<p>Tap till it becomes infinite ♾️</p>
-<div class="meter"><div class="fill" id="fill"></div></div>
-<button onclick="tap()">Tap 💖</button>
-<p id="m"></p>
+box.innerHTML=`
+<h1 class="line">Welcome baby ❤️</h1>
+<p class="line" style="animation-delay:.5s">
+to your hubby’s first try 🫶<br>
+for a special thing for you ✨
+</p>
 <button onclick="next()">Next ➡️</button>`;
 }
 
 else if(step===2){
-box.innerHTML=`<h1>MCQ 1 💕</h1>
-<p>How much do I love you?</p>
-<div class="opt" onclick="r('Nope 😜')">A little 🤏</div>
-<div class="opt" onclick="r('Moreeee 😍')">A lot ❤️</div>
-<div class="opt" onclick="r('Correct ♾️❤️')">Infinite ♾️</div>
-<p id="rx"></p>
+box.innerHTML=`
+<h1 class="line">Hi Beautiful 💖</h1>
+<p class="line" style="animation-delay:.5s">
+This is for you my love 😘
+</p>
 <button onclick="next()">Next ➡️</button>`;
 }
 
 else if(step===3){
-box.innerHTML=`<h1>MCQ 2 💍👶</h1>
-<p>What are my plans with you?</p>
-<div class="opt" onclick="r('Never 😤')">Just time pass 😅</div>
-<div class="opt" onclick="r('You + Me + Forever 💍👶❤️')">Marriage + Baby + Forever</div>
-<p id="rx"></p>
+box.innerHTML=`
+<p class="line">📅 21st June, 2023</p>
+<p class="line" style="animation-delay:.6s">
+Remember this day, my love 💗
+</p>
+<p class="line" style="animation-delay:1.2s">
+I promised you to love<br>
+365 days, 24 hours ⏳❤️
+</p>
 <button onclick="next()">Next ➡️</button>`;
 }
 
 else if(step===4){
-box.innerHTML=`<h1>MCQ 3 🌍</h1>
-<p>What are you to me?</p>
-<div class="opt" onclick="r('More than that 😘')">My girlfriend 😌</div>
-<div class="opt" onclick="r('YES 🥹❤️ My everything')">My everything 💫</div>
-<p id="rx"></p>
+box.innerHTML=`
+<h1>Love Meter 💗</h1>
+<p>Tap till it becomes infinite ♾️</p>
+<div class="meter"><div class="fill" id="fill"></div></div>
+<button onclick="tapLove()">Tap 💖</button>
+<p id="m"></p>
 <button onclick="next()">Next ➡️</button>`;
 }
 
 else if(step===5){
-box.innerHTML=`<h1>Will you be my Valentine? 💘</h1>
-<button onclick="no()">NO 😏</button>
-<button onclick="yes()">YES 😍</button>`;
-}
-
-else if(step===6){
-box.innerHTML=`<h1>My Promises 🤍</h1>
-<p class="line" style="animation-delay:.2s">I promise to stand by you.</p>
-<p class="line" style="animation-delay:1s">I promise to grow old with you.</p>
-<p class="line" style="animation-delay:2s">I promise to love you endlessly.</p>
+box.innerHTML=`
+<h1>Memory Game 🧠💞</h1>
+<div class="opt" onclick="mem('That moment lives in my heart 🥹')">First Meet 😌</div>
+<div class="opt" onclick="mem('My safest place 🫂❤️')">First Hug 🫶</div>
+<div class="opt" onclick="mem('Endless talks, endless love 🌙')">Late Night Talks 🌌</div>
+<p id="rx"></p>
 <button onclick="next()">Next ➡️</button>`;
 }
 
+else if(step===6){
+box.innerHTML=`
+<h1>How much do I love you? 💕</h1>
+<div class="opt" onclick="wrong()">A little 🤏</div>
+<div class="opt" onclick="wrong()">A lot ❤️</div>
+<div class="opt" onclick="correct()">Infinite ♾️💖</div>
+<p id="rx"></p>`;
+}
+
 else if(step===7){
-let c=5;
-box.innerHTML=`<h1>${c}</h1><p>Something special is coming…</p>`;
-let i=setInterval(()=>{
-c--;
-box.innerHTML=`<h1>${c}</h1><p>Something special is coming…</p>`;
-if(c===0){clearInterval(i);final()}
-},1000);
+box.innerHTML=`
+<h1>What are my plans with you? 💍👶</h1>
+<div class="opt" onclick="wrong()">Just time pass 😅</div>
+<div class="opt" onclick="correct()">Marriage + Baby + Forever 💍👶❤️</div>
+<p id="rx"></p>`;
+}
+
+else if(step===8){
+box.innerHTML=`
+<h1>What are you to me? 🌍</h1>
+<div class="opt" onclick="wrong()">My girlfriend 😌</div>
+<div class="opt" onclick="correct()">My everything 🥹❤️</div>
+<p id="rx"></p>`;
+}
+
+else if(step===9){
+box.innerHTML=`
+<h1>Will you be my Valentine? 💘</h1>
+<button onclick="readyNo()">NO 😏</button>
+<button onclick="next()">YES 😍</button>`;
+}
+
+else if(step===10){
+countdown(5);
 }
 }
 
-function tap(){
+function readyNo(){
+box.innerHTML=`
+<h1>Hey 😤💔</h1>
+<p>You know the answer already 😌<br>
+Please choose YES, my love ❤️</p>
+<button onclick="next()">YES 🥹</button>`;
+}
+
+function tapLove(){
 taps++;
 document.getElementById("fill").style.width=Math.min(taps*20,100)+"%";
 document.getElementById("m").innerHTML=
-taps>=5?"♾️ Our love is infinite ♾️":"Keep tapping 😘";
+taps>=5?"♾️ Our love is infinite ♾️":"Keep tapping baby 😘";
 }
 
-function r(t){document.getElementById("rx").innerHTML=t}
+function mem(t){document.getElementById("rx").innerHTML=t}
 
-function no(){
-box.innerHTML=`<h1>Error ❌😂</h1>
-<p>You are already my Valentine 😌❤️</p>
-<button onclick="yes()">YES 😍</button>`;
+function wrong(){
+document.getElementById("rx").innerHTML="Hmm 😏 try again baby… you know the right answer ❤️";
 }
 
-function yes(){next()}
+function correct(){
+document.getElementById("rx").innerHTML="That’s my girl 🥹💖";
+setTimeout(next,1200);
+}
+
+function countdown(n){
+let c=n;
+box.innerHTML=`<h1>${c}</h1><p>Something special is coming… ✨</p>`;
+let i=setInterval(()=>{
+c--;
+box.innerHTML=`<h1>${c}</h1><p>Something special is coming… ✨</p>`;
+if(c===0){clearInterval(i);final()}
+},1000);
+}
 
 function final(){
-box.innerHTML=`<h1>My Love ❤️</h1>
+box.innerHTML=`
+<h1>My Love ❤️</h1>
 <p>
 It's been 3 yrs and I always loved you and will always love you.<br><br>
 This Valentine's Day I want to give you something special that I'll give you when I'll meet you.<br><br>
-Tell me how much you liked it and always remember one thing My Love<br><br>
-<b>I Loveeeeeeeeeeeeeeeeee youuuuuuuuuuuuuuuuu infiniteeeeeeeeeeeeeeeee myyyyyyyyyyyy wifeyyyyyyyyyyyy</b><br>
+Tell me how much you liked it and always remember one thing my love…<br><br>
+<b>I Loveeeeeeeeeeeeeeeeee youuuuuuuuuuuuuuuuu<br>
+infiniteeeeeeeeeeeeeeeee myyyyyyyyyyyy wifeyyyyyyyyyyyy</b><br>
 😘😘😘😘😘😘❤️❤️❤️✨✨✨🫂🫂🫂🫂🫂💗💗💗💗💗
+</p>
+<p style="margin-top:20px">
+Thank you for experiencing this, my love 💌<br>
+Give feedback to your baby 🥹❤️
 </p>`;
 }
 
+/* Falling animations */
 setInterval(()=>{
 let p=document.createElement("div");
 p.className="petal";p.innerHTML="🌹";
