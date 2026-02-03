@@ -151,16 +151,6 @@ const box=document.getElementById("box");
 const body=document.body;
 const music=document.getElementById("music");
 const bgs=["bg1","bg2","bg3","bg4"];
-let lastTap=0;
-
-/* Hidden message – double tap */
-document.addEventListener("touchend",()=>{
-let now=Date.now();
-if(now-lastTap<300){
-alert("🔐 No matter what happens, I choose you. Always. ❤️");
-}
-lastTap=now;
-});
 
 function next(){
 step++;
@@ -261,7 +251,7 @@ box.innerHTML=`<h1>Will you be my Valentine? 💘</h1>
 else if(step===12){
 box.innerHTML=`<h1>Why I Love You 💌</h1>
 <p id="slider"></p>
-<button onclick="next()">Next ➡️</button>`;
+<button onclick="next()">Proceed my love ➡️</button>`;
 loveSlider();
 }
 
@@ -308,23 +298,40 @@ setTimeout(next,1400);
 }
 
 function loveSlider(){
-const lines=[
-"Because you feel like home 🏡",
-"Because you understand me without words 🫶",
-"Because loving you feels natural 💖",
-"Because I choose you, always ♾️"
-];
-let i=0;
-const el=document.getElementById("slider");
-el.innerHTML=lines[0];
-setInterval(()=>{
-i=(i+1)%lines.length;
-el.style.opacity=0;
-setTimeout(()=>{
-el.innerHTML=lines[i];
-el.style.opacity=1;
-},500);
-},2500);
+  const lines = [
+    "Because you feel like home 🏡",
+    "Because you understand me without words 🫶",
+    "Because loving you feels natural 💖",
+    "Because I choose you, always ♾️"
+  ];
+
+  const el = document.getElementById("slider");
+  let i = 0;
+
+  function showNext(){
+    if(i < lines.length){
+      el.style.opacity = 0;
+      setTimeout(()=>{
+        el.innerHTML = lines[i];
+        el.style.opacity = 1;
+        i++;
+        setTimeout(showNext, 2200);
+      },400);
+    } else {
+      el.style.opacity = 0;
+      setTimeout(()=>{
+        el.innerHTML = `
+          <b>All my reasons 💖</b><br><br>
+          ${lines.join("<br>")}<br><br>
+          <i>These are all my reasons, my love 😘<br>
+          Now proceed 💞</i>
+        `;
+        el.style.opacity = 1;
+      },500);
+    }
+  }
+
+  showNext();
 }
 
 function countdown(n){
