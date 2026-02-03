@@ -9,7 +9,7 @@
 *{box-sizing:border-box}
 body{
 margin:0;
-font-family:Poppins,Arial;
+font-family:Poppins, Arial;
 height:100vh;
 color:#fff;
 overflow:hidden;
@@ -18,7 +18,7 @@ background-position:center;
 transition:background-image 1.2s ease;
 }
 
-/* Nature backgrounds */
+/* Backgrounds */
 .bg1{background-image:url("https://images.unsplash.com/photo-1501785888041-af3ef285b470")}
 .bg2{background-image:url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee")}
 .bg3{background-image:url("https://images.unsplash.com/photo-1519681393784-d120267933ba")}
@@ -38,11 +38,11 @@ margin:auto;
 top:50%;
 transform:translateY(-50%);
 background:rgba(255,255,255,.15);
-backdrop-filter:blur(10px);
-padding:26px;
-border-radius:24px;
+backdrop-filter:blur(12px);
+padding:28px;
+border-radius:26px;
 text-align:center;
-animation:cardIn .9s ease;
+animation:cardIn 1s ease;
 }
 
 h1{font-size:26px}
@@ -51,8 +51,8 @@ p{font-size:18px}
 button,.opt{
 background:rgba(255,255,255,.25);
 border:none;
-padding:12px;
-border-radius:22px;
+padding:13px;
+border-radius:24px;
 margin:10px 0;
 font-size:16px;
 color:#fff;
@@ -62,18 +62,29 @@ transition:.3s
 button:hover,.opt:hover{background:rgba(255,255,255,.45)}
 
 @keyframes cardIn{
-from{opacity:0;transform:translateY(40px) scale(.95)}
+from{opacity:0;transform:translateY(50px) scale(.95)}
 to{opacity:1;transform:translateY(0) scale(1)}
 }
 
-/* Animated text lines */
+/* Text arrival */
 .line{
 opacity:0;
-transform:translateY(20px);
-animation:lineIn .9s forwards;
+transform:translateY(25px);
+animation:lineIn 1s forwards;
 }
 @keyframes lineIn{
 to{opacity:1;transform:translateY(0)}
+}
+
+/* Shake for wrong answers */
+.shake{
+animation:shake .4s;
+}
+@keyframes shake{
+0%,100%{transform:translateX(0)}
+25%{transform:translateX(-6px)}
+50%{transform:translateX(6px)}
+75%{transform:translateX(-6px)}
 }
 
 /* Love meter */
@@ -83,7 +94,7 @@ height:22px;
 background:rgba(255,255,255,.3);
 border-radius:20px;
 overflow:hidden;
-margin:10px 0
+margin:12px 0
 }
 .fill{
 height:100%;
@@ -92,7 +103,7 @@ background:linear-gradient(90deg,#ff6a88,#ff99ac);
 transition:.4s
 }
 
-/* Falling petals & stars */
+/* Falling effects */
 .petal,.star{
 position:fixed;
 top:-10px;
@@ -133,7 +144,7 @@ body.className=bgs[step%bgs.length];
 if(step===1){
 box.innerHTML=`
 <h1 class="line">Welcome baby ❤️</h1>
-<p class="line" style="animation-delay:.5s">
+<p class="line" style="animation-delay:.6s">
 to your hubby’s first try 🫶<br>
 for a special thing for you ✨
 </p>
@@ -143,7 +154,7 @@ for a special thing for you ✨
 else if(step===2){
 box.innerHTML=`
 <h1 class="line">Hi Beautiful 💖</h1>
-<p class="line" style="animation-delay:.5s">
+<p class="line" style="animation-delay:.6s">
 This is for you my love 😘
 </p>
 <button onclick="next()">Next ➡️</button>`;
@@ -152,10 +163,10 @@ This is for you my love 😘
 else if(step===3){
 box.innerHTML=`
 <p class="line">📅 21st June, 2023</p>
-<p class="line" style="animation-delay:.6s">
+<p class="line" style="animation-delay:.7s">
 Remember this day, my love 💗
 </p>
-<p class="line" style="animation-delay:1.2s">
+<p class="line" style="animation-delay:1.4s">
 I promised you to love<br>
 365 days, 24 hours ⏳❤️
 </p>
@@ -172,59 +183,99 @@ box.innerHTML=`
 <button onclick="next()">Next ➡️</button>`;
 }
 
+/* Memory Game 1 */
 else if(step===5){
 box.innerHTML=`
-<h1>Memory Game 🧠💞</h1>
-<div class="opt" onclick="mem('That moment lives in my heart 🥹')">First Meet 😌</div>
-<div class="opt" onclick="mem('My safest place 🫂❤️')">First Hug 🫶</div>
-<div class="opt" onclick="mem('Endless talks, endless love 🌙')">Late Night Talks 🌌</div>
+<h1>Our Memories 🧠💞</h1>
+<div class="opt" onclick="mem('That moment still makes me smile 🥹')">First Meet 😌</div>
+<div class="opt" onclick="mem('My safest place forever 🫂❤️')">First Hug 🫶</div>
+<div class="opt" onclick="mem('Endless nights, endless love 🌙')">Late Night Talks 🌌</div>
 <p id="rx"></p>
 <button onclick="next()">Next ➡️</button>`;
 }
 
+/* Memory Game 2 */
 else if(step===6){
 box.innerHTML=`
-<h1>How much do I love you? 💕</h1>
-<div class="opt" onclick="wrong()">A little 🤏</div>
-<div class="opt" onclick="wrong()">A lot ❤️</div>
-<div class="opt" onclick="correct()">Infinite ♾️💖</div>
-<p id="rx"></p>`;
+<h1>What makes us special? 💕</h1>
+<div class="opt" onclick="mem('Trust holds us together 🤍')">Trust 🤍</div>
+<div class="opt" onclick="mem('We understand each other deeply 🫶')">Understanding 🫶</div>
+<div class="opt" onclick="mem('Love beyond words 💖')">Love 💖</div>
+<p id="rx"></p>
+<button onclick="next()">Next ➡️</button>`;
 }
 
+/* Memory Game 3 */
 else if(step===7){
 box.innerHTML=`
-<h1>What are my plans with you? 💍👶</h1>
-<div class="opt" onclick="wrong()">Just time pass 😅</div>
-<div class="opt" onclick="correct()">Marriage + Baby + Forever 💍👶❤️</div>
-<p id="rx"></p>`;
+<h1>Choose our vibe 😘</h1>
+<div class="opt" onclick="mem('Cute & crazy is our style 😜')">Cute & Crazy 😜</div>
+<div class="opt" onclick="mem('Calm but deep 🌌')">Calm & Deep 🌌</div>
+<div class="opt" onclick="mem('Forever partners 💍')">Forever 💍</div>
+<p id="rx"></p>
+<button onclick="next()">Next ➡️</button>`;
 }
 
+/* MCQ 1 */
 else if(step===8){
 box.innerHTML=`
-<h1>What are you to me? 🌍</h1>
-<div class="opt" onclick="wrong()">My girlfriend 😌</div>
-<div class="opt" onclick="correct()">My everything 🥹❤️</div>
+<h1>How much do I love you? 💕</h1>
+<div class="opt" onclick="wrong(this,'That’s cute 😏 but far from truth')">A little 🤏</div>
+<div class="opt" onclick="wrong(this,'Close 😌 but not enough baby')">A lot ❤️</div>
+<div class="opt" onclick="correct('You know my heart 🥹♾️')">Infinite ♾️💖</div>
 <p id="rx"></p>`;
 }
 
+/* MCQ 2 */
 else if(step===9){
+box.innerHTML=`
+<h1>My plans with you 💍👶</h1>
+<div class="opt" onclick="wrong(this,'Never ever 😤')">Just time pass 😅</div>
+<div class="opt" onclick="correct('You are my future 🥹❤️')">Marriage + Baby + Forever</div>
+<p id="rx"></p>`;
+}
+
+/* MCQ 3 */
+else if(step===10){
+box.innerHTML=`
+<h1>What are you to me? 🌍</h1>
+<div class="opt" onclick="wrong(this,'More than that 😘')">My girlfriend 😌</div>
+<div class="opt" onclick="correct('That’s my world 🥹❤️')">My everything 💫</div>
+<p id="rx"></p>`;
+}
+
+/* Valentine */
+else if(step===11){
 box.innerHTML=`
 <h1>Will you be my Valentine? 💘</h1>
 <button onclick="readyNo()">NO 😏</button>
 <button onclick="next()">YES 😍</button>`;
 }
 
-else if(step===10){
+/* Promise Page BEFORE Countdown */
+else if(step===12){
+box.innerHTML=`
+<h1>My Promises 🤍</h1>
+<p class="line" style="animation-delay:.4s">I promise to stand by you.</p>
+<p class="line" style="animation-delay:1.2s">I promise to grow old with you.</p>
+<p class="line" style="animation-delay:2s">I promise to love you endlessly.</p>
+<button onclick="next()">Next ➡️</button>`;
+}
+
+/* Countdown */
+else if(step===13){
 countdown(5);
 }
 }
 
 function readyNo(){
+box.classList.add("shake");
 box.innerHTML=`
 <h1>Hey 😤💔</h1>
 <p>You know the answer already 😌<br>
-Please choose YES, my love ❤️</p>
+Choose YES, my love ❤️</p>
 <button onclick="next()">YES 🥹</button>`;
+setTimeout(()=>box.classList.remove("shake"),400);
 }
 
 function tapLove(){
@@ -236,13 +287,15 @@ taps>=5?"♾️ Our love is infinite ♾️":"Keep tapping baby 😘";
 
 function mem(t){document.getElementById("rx").innerHTML=t}
 
-function wrong(){
-document.getElementById("rx").innerHTML="Hmm 😏 try again baby… you know the right answer ❤️";
+function wrong(el,msg){
+el.classList.add("shake");
+document.getElementById("rx").innerHTML=msg;
+setTimeout(()=>el.classList.remove("shake"),400);
 }
 
-function correct(){
-document.getElementById("rx").innerHTML="That’s my girl 🥹💖";
-setTimeout(next,1200);
+function correct(msg){
+document.getElementById("rx").innerHTML=msg;
+setTimeout(next,1400);
 }
 
 function countdown(n){
@@ -272,7 +325,7 @@ Give feedback to your baby 🥹❤️
 </p>`;
 }
 
-/* Falling animations */
+/* Falling petals & stars */
 setInterval(()=>{
 let p=document.createElement("div");
 p.className="petal";p.innerHTML="🌹";
